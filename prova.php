@@ -1,0 +1,9 @@
+<?php
+$a=array();
+$b=array(
+  'ciao'=>'ciao',
+  'come'=>'come'
+);
+array_push($a,$b);
+print_r($b);
+?>
