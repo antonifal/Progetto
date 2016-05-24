@@ -2,6 +2,7 @@
 require_once('msgerr.class.php');
 require_once('date.class.php');
 require_once('place.class.php');
+require_once('codefis.class.php');
 
 class person
 {
@@ -14,6 +15,7 @@ class person
 	private $birthyear;
 	private $town;
 	private $district;
+	private $placecode;
 	private $cf;
 
 	private $msg_error=array();
@@ -76,6 +78,7 @@ class person
 		$place=new place;
 		$this->town=$place->get_comune();
 		$this->district=$place->get_provincia();
+		$this->placecode=get_placecode();
 		for($i=0;$i<count($place->get_msg_error());$i++)
 		{
 			array_push($this->msg_error,$place->get_msg_error()[$i]);
@@ -84,9 +87,12 @@ class person
 
 	private function set_cf()
 	{
-		echo "\nInserire il vostro cf:  ";
-		$this->cf=trim(fgets(STDIN));
+		new codefis($this->get_name(),$this->get_surname(),$this->get_sex(),
+					$this->get_birth_day(),$this->get_birth_month(),
+					$this->get_birth_year(),$this->placecode);
+		$this->cf=$codefis->get_cf();
 	}
+
 
 	public function get_name()
 	{

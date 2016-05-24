@@ -100,6 +100,11 @@ class place
 	 	return $this->provincia;
 	}
 
+	public function get_placecode()
+	{
+		return $this->code;
+	}
+
 	public function get_msg_error()
 	{
 		return $this->msg_error;
