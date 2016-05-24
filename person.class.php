@@ -160,7 +160,7 @@ class person
 			array_push($this->msg_error,'sex2');
 		}
 	//	print_r($this->msg_error);
-		new error($this->msg_error);
+		new msgerr($this->msg_error);
 
 	}
 

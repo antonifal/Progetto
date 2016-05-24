@@ -49,7 +49,7 @@ class place
 			array_push($this->msg_error,'district2');
 		}
 
-		$data=new read_data('D:\Nuova cartella\Progetto\codici_comuni_italiani.txt');
+		$data=new read_data('codici_comuni_italiani.txt');
 		$district_found=false;
 		$town_found=false;
 		$indx_district=1;
