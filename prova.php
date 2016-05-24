@@ -1,9 +1,5 @@
 <?php
-$a=array();
-$b=array(
-  'ciao'=>'ciao',
-  'come'=>'come'
-);
-array_push($a,$b);
-print_r($b);
+$connessione = mysql_connect("localhost","root","");
+shell_exec('source /home/antonio/Documenti/Progetto/prova.sql');
+
 ?>
