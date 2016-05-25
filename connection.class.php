@@ -5,11 +5,14 @@ class connection
   private $user = "root";
   private $password = "";
   private $connection="";
+  private $result="";
+  private $q="SELECT * FROM codici";
 
   public function __construct()
   {
     $this->connect();
-    $this->send_query();
+    $this->send_query($this->q);
+    $this->get_resource_array();
     $this->disconnect();
   }
 
@@ -23,21 +26,27 @@ class connection
     mysql_close($this->connection);
   }
 
-  public function send_query()
+  public function send_query($q)
   {
     mysql_select_db("codicefiscale");
-    $res = mysql_query("SELECT * FROM mesi ") or die("Query non valida: " . mysql_error());
+    $this->result = mysql_query($q) or die("Query non valida: " . mysql_error());
+  //  mysql_free_result($this->res);
+  }
 
-    while ($riga = mysql_fetch_array($res, MYSQL_NUM))
+  public function get_resource_array()
+  {
+    $i=0;
+    while ($riga = mysql_fetch_array($this->result, MYSQL_NUM))
     {
-      echo "\n".$riga[0]." ".$riga[1]."\n";
+      //echo "\n".$riga[0]." ".$riga[1]."\n";
+      $res_array[$i]=$riga;
+      $i++;
     }
-
-    mysql_free_result($res);
+    print_r($res_array);
   }
 
 
-}
+  }
 
 new connection;
 ?>
