@@ -90,12 +90,12 @@ class place
 
 	}
 
-	public function get_comune ()
+	public function get_comune()
  	{
 		return $this->comune;
 	}
 
- 	public function get_provincia ()
+ 	public function get_provincia()
  	{
 	 	return $this->provincia;
 	}

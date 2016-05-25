@@ -78,7 +78,7 @@ class person
 		$place=new place;
 		$this->town=$place->get_comune();
 		$this->district=$place->get_provincia();
-		$this->placecode=get_placecode();
+		$this->placecode=$place->get_placecode();
 		for($i=0;$i<count($place->get_msg_error());$i++)
 		{
 			array_push($this->msg_error,$place->get_msg_error()[$i]);
@@ -87,56 +87,64 @@ class person
 
 	private function set_cf()
 	{
-		new codefis($this->get_name(),$this->get_surname(),$this->get_sex(),
-					$this->get_birth_day(),$this->get_birth_month(),
-					$this->get_birth_year(),$this->placecode);
+		$codefis=new codefis($this->name,$this->surname,$this->sex,
+					$this->birthday,$this->birthmonth,
+					$this->birthyear,$this->placecode);
 		$this->cf=$codefis->get_cf();
 	}
 
 
 	public function get_name()
 	{
-		echo $this->name;
+		return $this->name;
 	}
 
 	public function get_surname()
 	{
-		echo $this->surname;
+		//echo $this->surname;
+		return $this->surname;
 	}
 
 	public function get_sex()
 	{
-		echo $this->sex;
+		//echo $this->sex;
+		return $this->sex;
 	}
 
 	public function get_birth_day()
 	{
-		echo $this->birthday;
+		//echo $this->birthday;
+		return $this->birthday;
 	}
 
 	public function get_birth_month()
 	{
-		echo $this->birthmonth;
+		//echo $this->birthmonth;
+		return $this->birthmonth;
 	}
 
 	public function get_birth_year()
 	{
-		echo $this->birthyear;
+		//echo $this->birthyear;
+		return $this->birthyear;
 	}
 
 	public function get_town()
 	{
-		echo $this->town;
+		//echo $this->town;
+		return $this->town;
 	}
 
 	public function get_district()
 	{
 		echo $this->district;
+		return $this->district;
 	}
 
 	public function get_cf()
 	{
 		echo $this->cf;
+		return $this->cf;
 	}
 
 	private function check_info()
