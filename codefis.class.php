@@ -151,9 +151,9 @@ private function elab_surname($data)
 			$con=array_values($con);
 			$data=array_merge($con,$voc);
 			while(count($data)<3) 
-			{
-				$data=array_push($data,"X");
-			}
+				{														# se l'intero nome è più corto di 3 caratteri aggiungiamo X
+					$data=array_push($data,"X");
+				}
 			$data=array($data[0],$data[1],$data[2]);
 			$data=implode("",$data);
 			return $data;
@@ -188,9 +188,9 @@ private function elab_name($data)
 			
 			$data=array_merge($con,$voc);
 			while(count($data)<3) 
-			{														# se l'intero nome è più corto di 3 caratteri aggiungiamo X
-				$data=array_push($data,"X");
-			}
+				{														# se l'intero nome è più corto di 3 caratteri aggiungiamo X
+					$data=array_push($data,"X");
+				}
 			$data=array($data[0],$data[1],$data[2]);
 			$data=implode("",$data);	
 			return $data;
@@ -199,26 +199,26 @@ private function elab_name($data)
 
  		
 private function control_char($cf_partial,$tabpari,$tabdisp,$tabfinal) 
- 		{
- 			$temp=str_split($cf_partial,1);
-			$pari=array($temp[1],$temp[3],$temp[5],$temp[7],$temp[9],$temp[11],$temp[13]);
-			$disp=array($temp[0],$temp[2],$temp[4],$temp[6],$temp[8],$temp[10],$temp[12],$temp[14]);
-			$ris1=0;
-			for ($x=0; $x<=count($pari)-1; $x++)
-			{
-				$key=$pari[$x];
-				$ris1=$ris1+$tabpari[$key];
-			}
-			$ris2=0;
-			for ($x=0; $x<=count($disp)-1; $x++)
-			{
-				$key=$disp[$x];
-				$ris2=$ris2+$tabdisp[$key];
-			}
-			$key=($ris1+$ris2)%26;
-			$temp=array_pad($temp,16,$tabfinal[$key]);
-			$cf_partial=implode("",$temp);
-			return $cf_partial;
+ 		{	
+ 				$temp=str_split($cf_partial,1);
+				$pari=array($temp[1],$temp[3],$temp[5],$temp[7],$temp[9],$temp[11],$temp[13]);
+				$disp=array($temp[0],$temp[2],$temp[4],$temp[6],$temp[8],$temp[10],$temp[12],$temp[14]);
+				$ris1=0;
+				for ($x=0; $x<=count($pari)-1; $x++)
+				{
+					$key=$pari[$x];
+					$ris1=$ris1+$tabpari[$key];
+				}
+				$ris2=0;
+				for ($x=0; $x<=count($disp)-1; $x++)
+				{
+					$key=$disp[$x];
+					$ris2=$ris2+$tabdisp[$key];
+				}
+				$key=($ris1+$ris2)%26;
+				$temp=array_pad($temp,16,$tabfinal[$key]);
+				$cf_partial=implode("",$temp);
+				return $cf_partial;
  		} 
 
 
