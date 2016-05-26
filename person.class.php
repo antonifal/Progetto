@@ -43,19 +43,19 @@ class person
 
 	private function set_name()
 	{
-		echo "\nInserire il vostro nome: \n\n";
+		echo "\nInserire il vostro nome: ";
 		$this->name=strtoupper(trim(fgets(STDIN)));
 	}
 
 	private function set_surname()
 	{
-		echo "Inserire il vostro cognome: \n\n";
+		echo "\n\nInserire il vostro cognome: ";
 		$this->surname=strtoupper(trim(fgets(STDIN)));
 	}
 
 	private function set_sex()
 	{
-		echo "Inserire il vostro sesso: \n\n";
+		echo "\n\nInserire il vostro sesso: ";
 		$this->sex=strtoupper(trim(fgets(STDIN)));
 	}
 
@@ -135,7 +135,7 @@ class person
 
 	public function get_cf()
 	{
-		echo $this->cf;
+		echo "\n\nIl codice fiscale risulta ---> $this->cf \n\n";
 		return $this->cf;
 	}
 

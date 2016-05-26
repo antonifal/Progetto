@@ -17,13 +17,13 @@ class place
 
 	private function set_comune ()
 	{
-		echo "Inserire comune:\n\n";
+		echo "\n\nInserire comune: ";
 		$this->comune=trim(fgets(STDIN));
 	}
 
 	private function set_provincia()
 	{
-		echo "Inserire Provincia:\n\n";
+		echo "\n\nInserire Provincia: ";
 		$this->provincia=trim(fgets(STDIN));
 	}
 

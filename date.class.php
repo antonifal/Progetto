@@ -29,19 +29,19 @@ class date
  }
  private function set_day()
  {
-  echo "Inserire giorno:"."\n\n";
+  echo "\n\nInserire giorno: ";
   $this->day=trim(fgets(STDIN));
  }
 
  private function set_month()
  {
-  echo "Inserire mese:"."\n\n";
+  echo "\n\nInserire mese: ";
   $this->month=trim(fgets(STDIN));
  }
 
  private function set_year()
  {
-  echo "Inserire anno:"."\n\n";
+  echo "\n\nInserire anno: ";
   $this->year=trim(fgets(STDIN));
  }
 
