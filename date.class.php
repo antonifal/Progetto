@@ -67,7 +67,7 @@ class date
      array_push($this->msg_error,'month');
    }
 
-   if((($this->month==2 && $this->day>29) or (($this->month==4 or $this->month==6 or $this->month==9 or $this->month==11) && $day>30)))
+   if((($this->month==2 && $this->day>29) or (($this->month==4 or $this->month==6 or $this->month==9 or $this->month==11) && $this->day>30)))
    {
      array_push($this->msg_error,'day');
      array_push($this->msg_error,'month');
