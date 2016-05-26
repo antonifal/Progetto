@@ -28,13 +28,16 @@ class place
 	}
 
 	private function check_place ()
-	{
+	{	
+		$search=" ";
+		$replace="";
+		$town=str_replace(" ","",$this->comune);
 		if (strlen($this->comune)<3)
 		{
 			array_push($this->msg_error,'town');
 		}
 
-		if(!ctype_alpha($this->comune))
+		if(!ctype_alpha($town))
 		{
 			array_push($this->msg_error,'town2');
 		}

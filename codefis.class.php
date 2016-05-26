@@ -42,7 +42,6 @@ private function set_cf($data)
 
 public function get_cf()
 		{
-			//echo $this->cf;
 			return $this->cf;
 		}
 
@@ -51,10 +50,10 @@ public function get_cf()
 private function elab_year($data) 
 		{
 			$data=trim($data);
-			$len=strlen($data);					# controlliamo la lunghezza dell'input anno
-				if ($len==4){ 					# se risulta diverso da 2 (es.87) o 4 (es.1987)
-				$temp=str_split($data,2);			# avvertiamo l'utente dell'errore commesso (es.987 o 11987)
-				$data=$temp[1];					# inoltre se lunghezza=4 riduciamo ai caratteri necessari
+			$len=strlen($data);
+				if ($len==4){ 
+				$temp=str_split($data,2);
+				$data=$temp[1];
 				}
 					elseif ($len==2) 
 					{
@@ -90,32 +89,28 @@ private function elab_month($data)
 
 private function elab_surname($data) 
 		{
-			$temp=str_split($data,1);    	# trasformiamo la stringa di input cognome in un array
-			$voc=$con=array();				# per poter elaborare il tutto
+			$temp=str_split($data,1);
+			$voc=$con=array();
 			for ($x=0; $x<=strlen($data)-1;$x++) 
 			{
 				if ($temp[$x]=='A' or $temp[$x]=='E' or $temp[$x]=='I' or $temp[$x]=='O' or $temp[$x]=='U') 
-				{																									# estraiamo le vocali
+				{
 					$voc[$x]=$temp[$x];
 				}																									
-				elseif ($temp[$x]=='B' or $temp[$x]=='C' or $temp[$x]=='D' or $temp[$x]=='F' or $temp[$x]=='G' or
-						$temp[$x]=='H' or $temp[$x]=='L' or $temp[$x]=='M' or $temp[$x]=='N' or $temp[$x]=='P' or 
-						$temp[$x]=='Q' or $temp[$x]=='R' or $temp[$x]=='S' or $temp[$x]=='T' or $temp[$x]=='V' or 
-						$temp[$x]=='W' or $temp[$x]=='X' or $temp[$x]=='Z' or $temp[$x]=='K' or $temp[$x]=='Y' or 
-						$temp[$x]=='J') 
-				{																						# estraiamo le consonanti
-							$con[$x]=$temp[$x];
+				else
+				{
+					$con[$x]=$temp[$x];
 		 		}
 			}
-			$voc=array_values($voc);									# compattiamo gli array ottenuti (eliminando i "buchi")
+			$voc=array_values($voc);
 			$con=array_values($con);
-			$data=array_merge($con,$voc);								# uniamo gli array con l'ordine giusto
+			$data=array_merge($con,$voc);
 			while(count($data)<3) 
-			{														# aggiungiamo il carattere X nel caso in cui non abbiamo 
-				$data=array_push($data,"X");							# il num sufficiente di caratteri
+			{
+				$data=array_push($data,"X");
 			}
-			$data=array($data[0],$data[1],$data[2]);					# prendiamo i caratteri che ci interessano (i primi 3)
-			$data=implode("",$data);							# riportiamo l'array a una stringa e restituiamo il risultato
+			$data=array($data[0],$data[1],$data[2]);
+			$data=implode("",$data);
 			return $data;
 		}
 
@@ -124,7 +119,7 @@ private function elab_surname($data)
 
 
 private function elab_name($data) 
-		{															# stesso procedimento della funzione elab_cognome
+		{
 			$temp=str_split($data,1);
 			$voc=$con=array();
 			for ($x=0; $x<=strlen($data)-1;$x++) 
@@ -133,11 +128,7 @@ private function elab_name($data)
 				{
 					$voc[$x]=$temp[$x];
 				}
-				if ($temp[$x]=='B' or $temp[$x]=='C' or $temp[$x]=='D' or $temp[$x]=='F' or $temp[$x]=='G' or
-						$temp[$x]=='H' or $temp[$x]=='L' or $temp[$x]=='M' or $temp[$x]=='N' or $temp[$x]=='P' or 
-						$temp[$x]=='Q' or $temp[$x]=='R' or $temp[$x]=='S' or $temp[$x]=='T' or $temp[$x]=='V' or 
-						$temp[$x]=='W' or $temp[$x]=='X' or $temp[$x]=='Z' or $temp[$x]=='K' or $temp[$x]=='Y' or 
-						$temp[$x]=='J')
+				else
 				{
 					$con[$x]=$temp[$x];
 		 		}
@@ -163,9 +154,8 @@ private function elab_name($data)
 
  		
 private function control_char($data) 
- 		{															# questa funzione ci restituisce il carattere di controllo del codice fiscale
+ 		{
  			$temp=str_split($data,1);
- 			print_r($temp);									# il primo array associativo contiene i valori da sostituire ai caratteri in pos. pari
  			$valpari=array( "0"=>"0","1"=>"1",
  							"2"=>"2","3"=>"3",
  							"4"=>"4","5"=>"5",
@@ -184,8 +174,7 @@ private function control_char($data)
 							"U"=>"20","V"=>"21",
 							"W"=>"22","X"=>"23",
 							"Y"=>"24","Z"=>"25");
- 			print_r($valpari);
- 																	# il secondo contiene i valori da sostituire ai caratteri in pos. dispari
+
 			$valdisp=array(	"0"=>"0","1"=>"0",
 							"2"=>"5","3"=>"7",
 							"4"=>"9","5"=>"13",
@@ -204,27 +193,24 @@ private function control_char($data)
 							"U"=>"16","V"=>"10",
 							"W"=>"22","X"=>"25",
 							"Y"=>"24","Z"=>"23");
-			print_r($valdisp);
-			$pari=array($temp[1],$temp[3],$temp[5],$temp[7],$temp[9],$temp[11],$temp[13]);				# creiamo l'array che contiene i caratteri in pos. pari
-			$disp=array($temp[0],$temp[2],$temp[4],$temp[6],$temp[8],$temp[10],$temp[12],$temp[14]);	# creiamo l'array che contiene i caratteri in pos. dispari
-			$ris=0;
+			$pari=array($temp[1],$temp[3],$temp[5],$temp[7],$temp[9],$temp[11],$temp[13]);
+			$disp=array($temp[0],$temp[2],$temp[4],$temp[6],$temp[8],$temp[10],$temp[12],$temp[14]);
+			$ris1=0;
 			for ($x=0; $x<=count($pari)-1; $x++)
 			{
 				$key=$pari[$x];
-				$ris=$ris+$valpari[$key];
-			}																# mettiamo in $pari la somma dei valori sotituiti ai caratteri pari
-			$pari=$ris;
-			$ris=0;
+				$ris1=$ris1+$valpari[$key];
+			}
+			$ris2=0;
 			for ($x=0; $x<=count($disp)-1; $x++)
 			{
 				$key=$disp[$x];
-				$ris=$ris+$valdisp[$key];
-			}																# mettiamo in $disp la somma dei valori sotituiti ai caratteri dispari
-			$disp=$ris;
-			$key=($pari+$disp)%26;												#  mettiamo in $key il resto della somma totale dei valori /26
-			$val=array("A","B","C","D","E","F","G","H","I","J","K","L","M",		# creiamo l'array contenete i caratteri di controllo
+				$ris2=$ris2+$valdisp[$key];
+			}
+			$key=($ris1+$ris2)%26;
+			$val=array("A","B","C","D","E","F","G","H","I","J","K","L","M",
 						"N","O","P","Q","R","S","T","U","V","W","X","Y","Z");
-			$temp=array_pad($temp,16,"$val[$key]");								# aggiungiamo il carattere di controllo opportuno ottenendo un codice fiscale completo
+			$temp=array_pad($temp,16,$val[$key]);
 			$data=implode("",$temp);
 			return $data;
  		} 

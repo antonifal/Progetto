@@ -44,19 +44,19 @@ class person
 	private function set_name()
 	{
 		echo "\nInserire il vostro nome: \n\n";
-		$this->name=trim(fgets(STDIN));
+		$this->name=strtoupper(trim(fgets(STDIN)));
 	}
 
 	private function set_surname()
 	{
 		echo "Inserire il vostro cognome: \n\n";
-		$this->surname=trim(fgets(STDIN));
+		$this->surname=strtoupper(trim(fgets(STDIN)));
 	}
 
 	private function set_sex()
 	{
 		echo "Inserire il vostro sesso: \n\n";
-		$this->sex=trim(fgets(STDIN));
+		$this->sex=strtoupper(trim(fgets(STDIN)));
 	}
 
 	private function set_date()
@@ -70,7 +70,6 @@ class person
 		{
 			array_push($this->msg_error,$date->get_msg_error()[$i]);
 		}
-		//$this->msg_error=$date->get_msg_error();
 	}
 
 	private function set_place()
@@ -101,43 +100,36 @@ class person
 
 	public function get_surname()
 	{
-		//echo $this->surname;
 		return $this->surname;
 	}
 
 	public function get_sex()
 	{
-		//echo $this->sex;
 		return $this->sex;
 	}
 
 	public function get_birth_day()
 	{
-		//echo $this->birthday;
 		return $this->birthday;
 	}
 
 	public function get_birth_month()
 	{
-		//echo $this->birthmonth;
 		return $this->birthmonth;
 	}
 
 	public function get_birth_year()
 	{
-		//echo $this->birthyear;
 		return $this->birthyear;
 	}
 
 	public function get_town()
 	{
-		//echo $this->town;
 		return $this->town;
 	}
 
 	public function get_district()
 	{
-		echo $this->district;
 		return $this->district;
 	}
 
