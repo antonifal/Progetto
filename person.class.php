@@ -28,8 +28,14 @@ class person
 		$this->set_sex();
 		$this->set_date();
 		$this->set_place();
-		$this->set_cf();
 		$this->check_info();
+		if($this->name=="" or $this->surname=="" or $this->sex=="" or $this->town=="" or $this->district=="")
+		{
+		echo "\n....mancano informazioni....\n\n";
+		}
+		else
+		{
+		$this->set_cf();
 		$this->get_name();
 		$this->get_surname();
 		$this->get_sex();
@@ -39,6 +45,7 @@ class person
 		$this->get_town();
 		$this->get_district();
 		$this->get_cf();
+		}
 	}
 
 	private function set_name()

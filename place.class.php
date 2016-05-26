@@ -24,7 +24,7 @@ class place
 
 	private function set_provincia()
 	{
-		echo "\n\nInserire Provincia: ";
+		echo "\n\nInserire Provincia: \n\n";
 		$this->provincia=trim(fgets(STDIN));
 	}
 
