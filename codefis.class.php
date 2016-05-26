@@ -17,7 +17,7 @@ public $tabfinal;
 
 
 public function __construct($name,$surname,$sex,$birthday,$birthmonth,$birthyear,$placecode)
-		{	
+		{
 		$tabmonth=array("01"=>"A",
 						"02"=>"B",
 						"03"=>"C",
@@ -102,17 +102,17 @@ public function get_cf()
 			return $this->cf;
 		}
 
-		
 
-private function elab_year($data) 
+
+private function elab_year($data)
 		{
 			$data=trim($data);
 			$len=strlen($data);
-				if ($len==4){ 
+				if ($len==4){
 				$temp=str_split($data,2);
 				$data=$temp[1];
 				}
-					elseif ($len==2) 
+					elseif ($len==2)
 					{
 					$temp=str_split($data,2);
 					$data=$temp[0];
@@ -123,7 +123,7 @@ private function elab_year($data)
 
 
 
-private function elab_month($birthmonth,$tabmonth) 
+private function elab_month($birthmonth,$tabmonth)
 		{
   			$data=$tabmonth[$birthmonth];
   			return $data;
@@ -132,16 +132,16 @@ private function elab_month($birthmonth,$tabmonth)
 
 
 
-private function elab_surname($data) 
+private function elab_surname($data)
 		{
 			$temp=str_split($data,1);
 			$voc=$con=array();
-			for ($x=0; $x<=strlen($data)-1;$x++) 
+			for ($x=0; $x<=strlen($data)-1;$x++)
 			{
-				if ($temp[$x]=='A' or $temp[$x]=='E' or $temp[$x]=='I' or $temp[$x]=='O' or $temp[$x]=='U') 
+				if ($temp[$x]=='A' or $temp[$x]=='E' or $temp[$x]=='I' or $temp[$x]=='O' or $temp[$x]=='U')
 				{
 					$voc[$x]=$temp[$x];
-				}																									
+				}
 				else
 				{
 					$con[$x]=$temp[$x];
@@ -150,7 +150,7 @@ private function elab_surname($data)
 			$voc=array_values($voc);
 			$con=array_values($con);
 			$data=array_merge($con,$voc);
-			while(count($data)<3) 
+			while(count($data)<3)
 			{
 				$data=array_push($data,"X");
 			}
@@ -163,13 +163,13 @@ private function elab_surname($data)
 
 
 
-private function elab_name($data) 
+private function elab_name($data)
 		{
 			$temp=str_split($data,1);
 			$voc=$con=array();
-			for ($x=0; $x<=strlen($data)-1;$x++) 
+			for ($x=0; $x<=strlen($data)-1;$x++)
 			{
-				if ($temp[$x]=='A' or $temp[$x]=='E' or $temp[$x]=='I' or $temp[$x]=='O' or $temp[$x]=='U') 
+				if ($temp[$x]=='A' or $temp[$x]=='E' or $temp[$x]=='I' or $temp[$x]=='O' or $temp[$x]=='U')
 				{
 					$voc[$x]=$temp[$x];
 				}
@@ -178,27 +178,30 @@ private function elab_name($data)
 					$con[$x]=$temp[$x];
 		 		}
 			}
+
 			$voc=array_values($voc);
 			$con=array_values($con);
-			if (count($con)>3) 
+
+			if (count($con)>3)
 			{ 														# se abbiamo più di 3 consonanti le prendiamo la prima terza e quarta
 				$temp=$con;												# altrimenti l'ordine rimane quello ottenuto da input
 				$con=array($temp[0],$temp[2],$temp[3]);
 			}
-			
+
 			$data=array_merge($con,$voc);
-			while(count($data)<3) 
+
+			while(count($data)<3)
 			{														# se l'intero nome è più corto di 3 caratteri aggiungiamo X
 				$data=array_push($data,"X");
 			}
 			$data=array($data[0],$data[1],$data[2]);
-			$data=implode("",$data);	
+			$data=implode("",$data);
 			return $data;
 		}
-		
 
- 		
-private function control_char($cf_partial,$tabpari,$tabdisp,$tabfinal) 
+
+
+private function control_char($cf_partial,$tabpari,$tabdisp,$tabfinal)
  		{
  			$temp=str_split($cf_partial,1);
 			$pari=array($temp[1],$temp[3],$temp[5],$temp[7],$temp[9],$temp[11],$temp[13]);
@@ -219,7 +222,7 @@ private function control_char($cf_partial,$tabpari,$tabdisp,$tabfinal)
 			$temp=array_pad($temp,16,$tabfinal[$key]);
 			$cf_partial=implode("",$temp);
 			return $cf_partial;
- 		} 
+ 		}
 
 
 

@@ -6,15 +6,16 @@ class connection
   private $password = "";
   private $connection="";
   private $result="";
-  private $q="SELECT * FROM codici";
+  private $q="SELECT * FROM mesi";
 
-  public function __construct()
-  {
-    $this->connect();
-    $this->send_query($this->q);
-    $this->get_resource_array();
-    $this->disconnect();
-  }
+//  public function __construct()
+//  {
+//    $this->connect();
+//    $this->send_query($this->q);
+  //  $this->get_resource_multid_array();
+//    $this->get_resource_array();
+//    $this->disconnect();
+//  }
 
   public function connect()
   {
@@ -26,14 +27,14 @@ class connection
     mysql_close($this->connection);
   }
 
-  public function send_query($q)
+  public function send_query($q,$db)
   {
-    mysql_select_db("codicefiscale");
+    mysql_select_db($db);
     $this->result = mysql_query($q) or die("Query non valida: " . mysql_error());
   //  mysql_free_result($this->res);
   }
 
-  public function get_resource_array()
+  public function get_resource_multid_array()
   {
     $i=0;
     while ($riga = mysql_fetch_array($this->result, MYSQL_NUM))
@@ -42,11 +43,19 @@ class connection
       $res_array[$i]=$riga;
       $i++;
     }
-    print_r($res_array);
+    return $res_array;
   }
 
-
+  public function get_resource_array()
+  {
+    $i=0;
+    while ($riga = mysql_fetch_array($this->result, MYSQL_NUM))
+    {
+      $res_array[$i]=implode(";", $riga);
+      $i++;
+    }
+    return $res_array;
   }
-
-new connection;
+}
+//$a=new connection;
 ?>
