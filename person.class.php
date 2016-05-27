@@ -17,6 +17,7 @@ class person
 	private $district;
 	private $placecode;
 	private $cf;
+	private $person_ok=false;
 
 	private $msg_error=array();
 
@@ -29,23 +30,15 @@ class person
 		$this->set_date();
 		$this->set_place();
 		$this->check_info();
-		if($this->name=="" or $this->surname=="" or $this->sex=="" or $this->town=="" or $this->district=="")
+
+		if($this->person_ok==false)
 		{
-		echo "\n....mancano informazioni....\n\n";
+			$this->set_default();
 		}
-		else
-		{
+
 		$this->set_cf();
-		$this->get_name();
-		$this->get_surname();
-		$this->get_sex();
-		$this->get_birth_day();
-		$this->get_birth_month();
-		$this->get_birth_year();
-		$this->get_town();
-		$this->get_district();
 		$this->get_cf();
-		}
+
 	}
 
 	private function set_name()
@@ -91,11 +84,27 @@ class person
 		}
 	}
 
+	private function set_default()
+	{
+		$this->name="MARIO";
+		$this->surname="ROSSI";
+		$this->sex="M";
+	}
+
 	private function set_cf()
 	{
-		$codefis=new codefis($this->name,$this->surname,$this->sex,
-					$this->birthday,$this->birthmonth,
-					$this->birthyear,$this->placecode);
+
+		$codefis=new codefis
+		(
+			$this->name,
+			$this->surname,
+			$this->sex,
+			$this->birthday,
+			$this->birthmonth,
+			$this->birthyear,
+			$this->placecode
+		);
+
 		$this->cf=$codefis->get_cf();
 	}
 
@@ -148,32 +157,50 @@ class person
 
 	private function check_info()
 	{
+		$n=true;
+		$n2=true;
+		$sn=true;
+		$sn1=true;
+		$sx=true;
+		$sx2=true;
+
 		if(strlen($this->name)<2)
 		{
+			$n=false;
 		  array_push($this->msg_error,'name');
 		}
 		if(ctype_alpha($this->name)!=TRUE)
 		{
+			$n2=false;
 			array_push($this->msg_error,'name2');
 		}
 		if(strlen($this->surname)<2)
 		{
+			$sn=false;
 			array_push($this->msg_error,'surname');
 		}
 		if(ctype_alpha($this->surname)!=TRUE)
 		{
+			$sn=false;
 			array_push($this->msg_error,'surname2');
 		}
 		if(strlen($this->sex)!=1)
 		{
+			$sx=false;
 			array_push($this->msg_error,'sex');
 		}
 		if($this->sex!='M' && $this->sex!='F')
 		{
+			$sx2=false;
 			array_push($this->msg_error,'sex2');
 		}
 	//	print_r($this->msg_error);
 		new msgerr($this->msg_error);
+
+		if ($n and $n2 and $sn and $sn1 and $sx and $sx2)
+		{
+			$this->person_ok=true;
+		}
 
 	}
 

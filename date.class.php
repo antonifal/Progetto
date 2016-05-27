@@ -78,28 +78,25 @@ class date
    if($d and $m and $y)
    {
      $this->check_ok=true;
-     //echo "data inserita corettamente \n\n";
    }
 
  }
 
  public function get_day()
  {
-   //echo $this->day;
    return $this->day;
  }
 
  public function get_month()
  {
-   //echo $this->month;
   return $this->month;
  }
 
  public function get_year()
  {
-   //echo $this->year;
    return $this->year;
  }
+
  public function get_date($format)
  {
    if($format=="gg/mm/aaaa" or $format=="GG/MM/AAAA")
@@ -108,14 +105,12 @@ class date
    }
 
  }
+
  public function get_msg_error()
  {
    return $this->msg_error;
-
  }
- 
-}
 
-//$a=new date();
+}
 
 ?>

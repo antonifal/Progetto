@@ -1,12 +1,12 @@
 <?php
-		$voc=$con=array();
+require_once('connection.class.php');
+$data_obj=new connection;
+$data_obj->connect();
+$data_obj->send_query("SELECT * FROM tabellaC ORDER BY codifica","codicefiscale");
+$data=$data_obj->get_resource_array();
 
-$data=array_merge($con,$voc);
-//while(count($data)<3)
-//{														# se l'intero nome è più corto di 3 caratteri aggiungiamo X
-  //$data=array_push($data,"X");
-//}
-//$data=array($data[0],$data[1],$data[2]);
-//$data=implode("",$data);
+print_r($data);
+//print_r(array_flip($data));
+$data_obj->disconnect();
 
 ?>
